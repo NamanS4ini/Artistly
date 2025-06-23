@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎭 Artistly – Performing Artist Booking Platform (Frontend Demo)
 
-## Getting Started
+A functional and mobile-responsive web demo built with **Next.js 13+ App Router**, Tailwind CSS, and React Hook Form.
 
-First, run the development server:
+> ✅ This project was created as part of an internship assessment. It simulates a real-world SaaS platform connecting Event Planners and Performing Artists.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## ✨ Features
+
+### 🔹 Public Interface
+- **Homepage** with hero section and artist category cards
+- **Artists Listing** with real-time filters (Category, Location, Price)
+- **Detailed Artist Profile** (`/user/[id]`) with full info
+- **Onboarding Form** for artists to submit their profile
+
+### 🔹 Admin Interface
+- **Manager Dashboard** to view all artist submissions in a styled, sortable table
+- Conditional rendering if no submissions exist
+
+### 🧪 Tech Stack
+
+- [Next.js 13+ (App Router)](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [ShadCN](https://ui.shadcn.com/)
+- TypeScript
+- Mock API (`/api/artists`) with static JSON data
+
+---
+
+## 🗂 Folder Structure (Key)
+
+```
+/app
+  ├── page.tsx                → Homepage
+  ├── artists/page.tsx        → Filterable artist listing
+  ├── user/[id]/page.tsx      → Artist detail page
+  ├── onboarding/page.tsx     → Artist submission form
+  ├── dashboard/page.tsx      → Manager view
+  └── api/artists/route.ts    → Mock API route
+
+/components
+  ├── Header.tsx
+  ├── filter-bar.tsx
+  └── ui/                     → ShadCN components
+
+/lib
+  └── artists.ts              → Mock artist data
+
+/public/images               → Artist image placeholders
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧑‍💻 How to Run Locally
 
-## Learn More
+```bash
+git clone https://github.com/namans4ini/artistly.git
+cd artistly
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+- Visit: [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---

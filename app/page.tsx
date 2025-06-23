@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Link from "next/link";
 
 export default function Home() {
@@ -59,3 +58,8 @@ export default function Home() {
   );
 }
 
+
+export const metadata = {
+  title: "Artistly | Home",
+  description: "Discover and book artists for your events. Browse by category, location, and price."
+};
