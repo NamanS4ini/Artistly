@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 
@@ -16,20 +16,31 @@ const feeRanges = [
   "Above ₹50,000"
 ];
 
+// Define the data structure for the form inputs
+type DataProp = {
+  name: string;
+  bio: string;
+  categories: string[];
+  languages: string[];
+  feeRange: string;
+  location: string;
+}
+
 export default function ArtistOnboardingForm() {
-    // Initialize the form with react-hook-form
+  // Initialize the form with react-hook-form
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors }
-  } = useForm();
+  } = useForm<DataProp>();
 
   const [profileImage, setProfileImage] = useState<File | null>(null);
 
 
-    // Handle form submission
-  const onSubmit = (data: any) => {
+  // Handle form submission
+  const onSubmit = (data: DataProp) => {
     console.log({ ...data, profileImage });
     alert("Artist submitted. Check console for details.");
     reset();
@@ -37,7 +48,7 @@ export default function ArtistOnboardingForm() {
   };
 
   return (
-    <div className="bg-gradient-to-br p-20 from-blue-100 via-purple-100 to-pink-100 min-h-screen">
+    <div className="bg-gradient-to-br md:p-20 from-blue-100 via-purple-100 to-pink-100 min-h-screen">
       <div className="max-w-3xl text-gray-800 pt-20 mx-auto p-8 bg-white/80 rounded-2xl shadow-2xl backdrop-blur-md">
         <h1 className="text-3xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-blue-600">
           Artist Onboarding
@@ -49,23 +60,40 @@ export default function ArtistOnboardingForm() {
             <label className="block font-semibold mb-2 text-blue-700">Name</label>
             <input
               type="text"
-              {...register("name", { required: "Name is required" })}
+              {...register("name", {
+                required: "Name is required",
+                maxLength: { value: 50, message: "Name cannot exceed 50 characters" },
+                minLength: { value: 2, message: "Name must be at least 2 characters" }
+              })}
               className="w-full border-2 border-blue-200 focus:border-blue-400 p-3 rounded-lg outline-none transition"
               placeholder="Enter your name"
             />
-            {errors.name && <p className="text-pink-600 text-xs mt-1">{`${errors.name.message}`}</p>}
+            {errors.name && <p className="text-pink-600 text-xs mt-1">
+              {`${errors.name.message}`}
+              </p>}
           </div>
 
           {/* Bio */}
           <div>
             <label className="block font-semibold mb-2 text-blue-700">Bio</label>
             <textarea
-              {...register("bio", { required: "Bio is required" })}
+              {...register("bio", {
+                required: "Bio is required",
+                maxLength: { value: 500, message: "Bio cannot exceed 500 characters" },
+                minLength: { value: 10, message: "Bio must be at least 10 characters" }
+              })}
               className="w-full border-2 border-blue-200 focus:border-blue-400 p-3 rounded-lg outline-none transition"
               rows={3}
               placeholder="Tell us about yourself"
             />
-            {errors.bio && <p className="text-pink-600 text-xs mt-1">{`${errors.bio.message}`}</p>}
+            <div className="text-xs text-gray-500 text-right mt-1">
+
+              {`${watch("bio")?.length || 0}/500`}
+
+            </div>
+            {errors.bio && <p className="text-pink-600 text-xs mt-1">
+              {`${errors.bio.message}`}
+            </p>}
           </div>
 
           {/* Categories (multi-select with checkboxes) */}
@@ -84,7 +112,9 @@ export default function ArtistOnboardingForm() {
                 </label>
               ))}
             </div>
-            {errors.categories && <p className="text-pink-600 text-xs mt-1">{`${errors.categories.message}`}</p>}
+            {errors.categories && <p className="text-pink-600 text-xs mt-1">
+              {`${errors.categories.message}`}
+            </p>}
           </div>
 
           {/* Languages (multi-select with checkboxes) */}
@@ -103,7 +133,9 @@ export default function ArtistOnboardingForm() {
                 </label>
               ))}
             </div>
-            {errors.languages && <p className="text-pink-600 text-xs mt-1">{`${errors.languages.message}`}</p>}
+            {errors.languages && <p className="text-pink-600 text-xs mt-1">
+              {`${errors.languages.message}`}
+            </p>}
           </div>
 
           {/* Fee Range */}
@@ -118,7 +150,9 @@ export default function ArtistOnboardingForm() {
                 <option key={fee} value={fee}>{fee}</option>
               ))}
             </select>
-            {errors.feeRange && <p className="text-pink-600 text-xs mt-1">{`${errors.feeRange.message}`}</p>}
+            {errors.feeRange && <p className="text-pink-600 text-xs mt-1">
+              {`${errors.feeRange.message}`}
+            </p>}
           </div>
 
           {/* Profile Image Upload */}
@@ -151,12 +185,14 @@ export default function ArtistOnboardingForm() {
               className="w-full border-2 border-blue-200 focus:border-blue-400 p-3 rounded-lg outline-none transition"
               placeholder="City, State"
             />
-            {errors.location && <p className="text-pink-600 text-xs mt-1">{`${errors.location.message}`}</p>}
+            {errors.location && <p className="text-pink-600 text-xs mt-1">
+              {`${errors.location.message}`}
+            </p>}
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition text-lg"
+            className="w-full py-3 bg-blue-600 cursor-pointer text-white font-bold rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition text-lg"
           >
             Submit Artist
           </button>

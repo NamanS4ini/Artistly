@@ -47,7 +47,7 @@ export const artists = [
   {
     id: "a5",
     name: "Zara Khan",
-    bio: "Versatile artist – singer and speaker with a passion for live events.",
+    bio: "Versatile artist - singer and speaker with a passion for live events.",
     categories: ["Singer", "Speaker"],
     languages: ["Hindi", "Punjabi"],
     feeRange: "₹18,000 - ₹30,000",

@@ -3,21 +3,22 @@ import { artists } from '@/lib/artists';
 import Image from 'next/image';
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
-export default function ArtistDetailPage({ params }: Props) {
-    // Find the artist by ID from the params
-  const artist = artists.find((a) => a.id === params.id);
+export default async function ArtistDetailPage({ params }: Props) {
+  const { id } = await params;
+  // Find the artist by ID from the params
+  const artist = artists.find((a) => a.id === id);
 
   if (!artist) return notFound();
 
   return (
-    <div className='min-h-screen w-full p-20 bg-gradient-to-r from-blue-50 to-blue-100'>
+    <div className='min-h-screen w-full md:p-20 bg-gradient-to-r from-blue-50 to-blue-100'>
 
-    <div className="max-w-3xl p-20 mx-auto bg-gradient-to-br from-white via-blue-50 to-blue-100 shadow-xl rounded-2xl mt-12">
+    <div className="max-w-3xl pt-12 md:p-20 mx-auto bg-gradient-to-br from-white via-blue-50 to-blue-100 shadow-xl rounded-2xl mt-12">
       <div className="flex flex-col items-center">
         <div className="relative w-48 h-48 mb-6">
           <Image
@@ -33,7 +34,7 @@ export default function ArtistDetailPage({ params }: Props) {
         </h1>
         <p className="text-lg text-gray-600 mb-6 text-center max-w-xl">{artist.bio}</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 text-blue-900">
+      <div className="grid grid-cols-1 p-5 pt-0 md:grid-cols-2 gap-6 md:mt-8 text-blue-900">
         <div className="bg-white bg-opacity-80 rounded-lg p-4 shadow flex flex-col gap-2">
           <span className="font-semibold">Categories:</span>
           <span className="text-blue-700">{artist.categories.join(', ')}</span>
@@ -63,7 +64,8 @@ export default function ArtistDetailPage({ params }: Props) {
 
 
 export async function generateMetadata({ params }: Props) {
-  const artist = artists.find((a) => a.id === params.id);
+  const { id } = await params;
+  const artist = artists.find((a) => a.id === id);
   if (!artist) return {};
   return {
     title: artist.name,

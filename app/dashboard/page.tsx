@@ -13,10 +13,10 @@ export default function ManagerDashboard() {
         router.push(`/user/${artistId}`);
     }
   return (
-    <div className="min-h-screen w-full bg-gradient-to-r from-blue-50 to-blue-100 p-20 ">
+    <div className="min-h-screen w-full bg-gradient-to-r from-blue-50 to-blue-100 pt-20 p-5 md:p-20 ">
 
-    <div className="max-w-7xl mx-auto p-8 bg-gradient-to-br from-white via-blue-50 to-blue-100 rounded-xl shadow-lg">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-blue-900 drop-shadow">
+    <div className="max-w-7xl mx-auto md:p-8 p-2 bg-gradient-to-br from-white via-blue-50 to-blue-100 rounded-xl shadow-lg">
+      <h1 className="md:text-4xl text-3xl pt-4 font-extrabold mb-8 text-center text-blue-900 drop-shadow">
         Manager Dashboard
       </h1>
 
@@ -50,7 +50,7 @@ export default function ManagerDashboard() {
                     <td className="p-5 border-b text-blue-700">{artist.location}</td>
                     <td className="p-5 border-b text-blue-700">{artist.feeRange}</td>
                     <td className="p-5 border-b">
-                      <Button onClick={() => handleViewArtist(artist.id)} variant="outline" className="border border-blue-400 text-blue-700 hover:bg-blue-100">
+                      <Button onClick={() => handleViewArtist(artist.id)} variant="outline" className="border border-blue-400 cursor-pointer text-blue-700 hover:bg-blue-100">
                         View
                       </Button>
                     </td>

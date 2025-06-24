@@ -16,12 +16,13 @@ type Artist = {
 
 // Type for the props passed to the ArtistsPage component
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     location?: string;
     price?: string;
-  };
+  }>;
 };
+
 
 export default async function ArtistsPage({ searchParams }: Props) {
   // Extract search parameters
